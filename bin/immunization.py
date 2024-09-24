@@ -55,7 +55,7 @@ class Immunization(object):
                     "status": "generated",
                     "div": '<div xmlns="http://www.w3.org/1999/xhtml">%s</div>'%data["CVX_title"]
                 },
-                "date": data["date"],
+                "occurrenceDateTime": data["date"],
                 "vaccineCode": {
                     "coding": [
                         {
@@ -69,6 +69,7 @@ class Immunization(object):
             }
         }
 
+        """ R5 has a different way on status and explanation, so just comment it out
         if data["administration_status"] == 'http://smarthealthit.org/terms/codes/ImmunizationAdministrationStatus#doseGiven':
             out["resource"]["notGiven"] = False
         elif data["administration_status"] == 'http://smarthealthit.org/terms/codes/ImmunizationAdministrationStatus#notAdministered':
@@ -118,5 +119,6 @@ class Immunization(object):
                         }
                     ]
                 }
+        """
 
         return out

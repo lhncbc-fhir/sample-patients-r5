@@ -63,7 +63,8 @@ def Observation(data, prefix=""):
         "subject": {
             "reference": "Patient/" + prefix + data["pid"]
         },
-        "effectiveDateTime": data["date"],
+        # HAPI FHIR 6.x (Elasticsearch) unable to parse dates older than 1970 (the epoch)
+        # "effectiveDateTime": data["date"],
         "category": [
             {
                 "coding": [
@@ -98,7 +99,7 @@ def Observation(data, prefix=""):
     # of an encounter or episode but still be tied to the context of the
     # encounter or episode (e.g. pre-admission lab tests).
     if data.has_key("encounter_id"):
-        out["context"] = {
+        out["encounter"] = {
             "reference": "Encounter/" + data["encounter_id"]
         }
 

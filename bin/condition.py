@@ -45,7 +45,12 @@ class Condition(object):
             "resource": {
                 "id"            : prefix + "Condition-" + self.id,
                 "resourceType"  : "Condition",
-                "clinicalStatus": "active",
+                "clinicalStatus": {
+                    "coding": [ {
+                      "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+                      "code": "active"
+                    } ]
+                },
                 "subject": {
                     "reference": "Patient/" + prefix + self.pid
                 },
@@ -53,7 +58,12 @@ class Condition(object):
                     "status": "generated",
                     "div": '<div xmlns="http://www.w3.org/1999/xhtml">%s</div>' % self.name
                 },
-                "verificationStatus": "confirmed",
+                "verificationStatus": {
+                    "coding": [ {
+                      "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+                      "code": "confirmed"
+                    } ]
+                },
                 "onsetDateTime": self.start,
                 "code": {
                     "coding": [

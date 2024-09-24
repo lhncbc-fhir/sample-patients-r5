@@ -83,9 +83,21 @@ class Allergy(object):
                     "div": '<div xmlns="http://www.w3.org/1999/xhtml">%s</div>'
                            % allergyString
                 },
-                "assertedDate": self.start,
-                "verificationStatus": "confirmed",
-                "clinicalStatus": "resolved" if self.end else "active",
+                # "assertedDate": self.start,  # Gone in R5, most likely replaced by the encounter
+                # "verificationStatus": "confirmed",
+                # "clinicalStatus": "resolved" if self.end else "active",
+                "verificationStatus": {
+                    "coding": [ {
+                      "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification",
+                      "code": "confirmed"
+                    } ]
+                },
+                "clinicalStatus": {
+                    "coding": [ {
+                      "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical",
+                      "code": "resolved" if self.end else "active"
+                    } ]
+                },
                 "patient": {
                     "reference": "Patient/" + prefix + self.pid
                 },
@@ -108,6 +120,8 @@ class Allergy(object):
         if self.criticality:
             out["resource"]["criticality"] = self.criticality
 
+        """
+        In R5, "reaction" is a list of CodeableReference for observations. Commented out for now.
         if self.reaction:
             out["resource"]["reaction"] = [
                 {
@@ -128,5 +142,6 @@ class Allergy(object):
 
             if self.severity:
                 out["resource"]["reaction"][0]["severity"] = self.severity
+        """
 
         return out
