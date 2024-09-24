@@ -9,10 +9,10 @@ def Encounter(data, prefix=""):
     resource = {
         "resourceType": "Encounter",
         "id": data["id"],
-        "status": "finished",
-        "class": {
-            "code": data["encounter_type"]
-        },
+        "status": "completed",
+        "class": [{ 
+            "coding": [ { "code": data["encounter_type"] } ]
+        }],
         "text": {
             "status": "generated",
             "div": '<div xmlns="http://www.w3.org/1999/xhtml">' +

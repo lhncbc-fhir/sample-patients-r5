@@ -53,7 +53,7 @@ class Procedure(object):
                     "status": "generated",
                     "div": '<div xmlns="http://www.w3.org/1999/xhtml">%s</div>' % self.name
                 },
-                "performedDateTime": self.date,
+                "occurrenceDateTime": self.date,
                 "code": {
                     "coding": [
                         {

@@ -82,7 +82,7 @@ class Med(object):
                 # resource that represents the medication which may be the details
                 # of the medication or simply an attribute carrying a code that
                 # identifies the medication from a known list of medications.
-                "medicationCodeableConcept": {
+                "medication": {
                     "coding": [
                         {
                             "system" : "http://www.nlm.nih.gov/research/umls/rxnorm",
@@ -116,12 +116,16 @@ class Med(object):
                 instruction["timing"]["repeat"]["boundsPeriod"]["end"] = self.end
 
         if self.qtt and self.qttunit:
-            instruction["doseQuantity"] = {
-                "value" : float(self.qtt),
-                "unit"  : self.qttunit,
-                "system": "http://unitsofmeasure.org",
-                "code"  : self.qttunit
-            }
+            instruction["doseAndRate"] = [
+                {
+                    "doseQuantity": {
+                        "value" : float(self.qtt),
+                        "unit"  : self.qttunit,
+                        "system": "http://unitsofmeasure.org",
+                        "code"  : self.qttunit
+                    }
+                }
+            ];
 
         if "prn" in self.sig:
             instruction["asNeededBoolean"] = True

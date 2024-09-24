@@ -73,15 +73,17 @@ class Refill(object):
                 # resource that represents the medication which may be the details
                 # of the medication or simply an attribute carrying a code that
                 # identifies the medication from a known list of medications.
-                "medicationCodeableConcept": {
-                    "coding": [
-                        {
-                            "system" : "http://www.nlm.nih.gov/research/umls/rxnorm",
-                            "code"   : self.rxn,
-                            "display": med.name
-                        }
-                    ],
-                    "text": med.name
+                "medication": {
+                    "concept": {
+                        "coding": [
+                            {
+                                "system" : "http://www.nlm.nih.gov/research/umls/rxnorm",
+                                "code"   : self.rxn,
+                                "display": med.name
+                            }
+                        ],
+                        "text": med.name
+                    }
                 },
 
                 "authorizingPrescription": [

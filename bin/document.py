@@ -59,8 +59,8 @@ class Document(object):
                            % self.title
                 },
                 "status" : "current",
-                "created": self.date,
-                "indexed": datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ"),
+                # "created": self.date, Moved to attachment in R5
+                "date": datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ"),
                 "type": {
                     "coding": [
                         {
